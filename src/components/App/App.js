@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import ReactLoading from 'react-loading';
 import StarshipsList from '../StarshipsList/StarshipsList';
 
 const ENDPOINT = 'https://swapi.co/api/starships/';
@@ -8,6 +9,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+        loading: true,
         starships: [],
         next: '',
         previous: '',
@@ -19,9 +21,13 @@ class App extends React.Component {
   }
 
   getStarshipsData(currentURL) {
+    this.setState({
+      loading: true
+    });
     fetch(currentURL)
       .then(data => data.json())
       .then(data => this.setState({
+        loading: false,
         starships: data.results,
         next: data.next,
         previous: data.previous
@@ -61,14 +67,18 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <StarshipsList 
-          starships={this.state.starships}
-        />
-        {this.renderPaginationbuttons()}
-      </div>
-    );
+    if(!this.state.loading) {
+      return (
+        <div className="App">
+          <StarshipsList 
+            starships={this.state.starships}
+          />
+          {this.renderPaginationbuttons()}
+        </div>
+      );
+    } else {
+      return <ReactLoading type='cylon' color='#3caa36' height={'20%'} width={'20%'} />;
+    }
   }
 }
 
