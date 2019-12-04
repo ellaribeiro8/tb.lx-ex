@@ -1,0 +1,11 @@
+.input {
+    border: 1px solid $lightgray;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 12px 25px;
+
+    &:focus {
+        outline: none;
+        border: 1px solid $mediumgray;
+    }
+}

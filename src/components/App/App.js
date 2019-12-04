@@ -3,6 +3,8 @@ import './App.scss';
 import ReactLoading from 'react-loading';
 import Searchbar from '../Searchbar/Searchbar'
 import StarshipsList from '../StarshipsList/StarshipsList';
+// import StarshipInfoCard from '../StarshipInfoCard/StarshipInfoCard';
+import DarthVader from '../../assets/Darth_Vader.jpg';
 
 const ENDPOINT = 'https://swapi.co/api/starships/';
 
@@ -60,19 +62,18 @@ class App extends React.Component {
     this.getStarshipsData(ENDPOINT + '?search=' + this.state.searchInputValue);
   }
   
-
   renderPaginationbuttons() {
     let pagination = [];
 
     if(this.state.previous !== null) {
       pagination.push(
-        <button onClick={this.handlePaginationButtonClick.bind(this)} key='previous' id='previous'>Previous</button>
+        <button onClick={this.handlePaginationButtonClick.bind(this)} key='previous' id='previous'>←</button>
       );
     }
 
     if(this.state.next !== null) {
       pagination.push(
-        <button onClick={this.handlePaginationButtonClick.bind(this)} key='next' id='next'>Next</button>
+        <button onClick={this.handlePaginationButtonClick.bind(this)} key='next' id='next'>→</button>
       );
     }
 
@@ -92,19 +93,26 @@ class App extends React.Component {
             <StarshipsList 
               starships={this.state.starships}
             />
-            {this.renderPaginationbuttons()}
+            <div className='Pagination'>
+              {this.renderPaginationbuttons()}
+            </div>
           </div>
         );
       } else {
         return (
           <div className='noResults'>
+            <img src={DarthVader} alt='Darth Vader' />
             Sorry human, no results were found!
           </div>
         
         );
       }
     } else {
-      return <ReactLoading type='cylon' color='#3caa36' height={'20%'} width={'20%'} />;
+      return (
+        <div className="App">
+          <ReactLoading type='cylon' color='#3caa36' height={'20%'} width={'20%'} />
+        </div>
+      );
     }
   }
 }

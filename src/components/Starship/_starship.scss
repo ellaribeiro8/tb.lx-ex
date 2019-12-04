@@ -1,0 +1,15 @@
+.Starship {
+  width: 100%;
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
+  @include align-items(center);
+  color: $black;
+  background-color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $lightgray;
+  }
+}
