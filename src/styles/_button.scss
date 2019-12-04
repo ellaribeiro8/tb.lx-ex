@@ -1,0 +1,38 @@
+.button {
+    text-align: center;
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+    @include justify-content(space-between);
+    @include align-items(center);
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 12px 25px;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.primaryButton {
+    @extend .button;
+    color: #fff;
+    background-color: $tblxgreen;
+    border: 1px solid $tblxgreen;
+
+    &:hover {
+        background-color: darken($color: $tblxgreen, $amount: 5);
+    }
+}
+
+.secondaryButton {
+    @extend .button;
+    color: #ffffff;
+    background-color: $mediumgray;
+    border: 1px solid $mediumgray;
+
+    &:hover {
+        background-color: darken($color: $mediumgray, $amount: 5);
+    }
+}

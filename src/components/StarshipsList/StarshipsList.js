@@ -19,9 +19,9 @@ class StarshipsList extends React.Component {
       })
     }else{
     starships.push(
-        <div className="EmptyList">
-            UPS! SOMETHING WENT WRONG, TRY TO REFRESH YOUR PAGE!
-        </div>
+      <div className="EmptyList">
+          UPS! SOMETHING WENT WRONG, TRY TO REFRESH YOUR PAGE!
+      </div>
       );
     }
 

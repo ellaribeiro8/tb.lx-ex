@@ -1,25 +1,64 @@
 @import '../../styles/_mixins.scss';
+@import '../../styles/_helpers.scss';
+@import '../../styles/_input.scss';
+@import '../../styles/_button.scss';
 @import '../StarshipsList/_starshipsList.scss';
+@import '../Starship/_starship.scss';
+@import '../Searchbar/_searchbar.scss';
 
 .App {
+  width: 80vw;
+  min-height: 80vh;
+  background-color: #ffffff;
   text-align: center;
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  @include align-items(center);
+  margin: auto;
+  padding: 40px;
 }
 
-.App-logo {
-  height: 40vmin;
+.Pagination {
+  width: 100%;
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  #previous,
+  #next {
+    @include flex-grow(1);
+    @extend .secondaryButton;
+    font-size: 2em;
+  }
+
+  #previous {
+    @include justify-content(flex-start);
+    margin-right: 5px;
+  }
+
+  #next {
+    @include justify-content(flex-end);
+    margin-left: 5px;
+  }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+.noResults {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+  color: #ffffff;
+  font-size: 2em;
+  font-weight: bold;
 
-.App-link {
-  color: #09d3ac;
+  img {
+    width: 40%;
+    margin-bottom: 20px;
+  }
 }
