@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import ReactLoading from 'react-loading';
+import Searchbar from '../Searchbar/Searchbar'
 import StarshipsList from '../StarshipsList/StarshipsList';
 
 const ENDPOINT = 'https://swapi.co/api/starships/';
@@ -13,6 +14,7 @@ class App extends React.Component {
         starships: [],
         next: '',
         previous: '',
+        searchInputValue: '',
     }
   }
 
@@ -48,6 +50,17 @@ class App extends React.Component {
     e.target === previousButton ? this.getPreviousPage(this.state.previous) : this.getNextPage(this.state.next)
   }
 
+  inputValueChange(e) {
+    this.setState({
+      searchInputValue: e.target.value,
+    })
+  }
+
+  handleSearchClick() {
+    this.getStarshipsData(ENDPOINT + '?search=' + this.state.searchInputValue);
+  }
+  
+
   renderPaginationbuttons() {
     let pagination = [];
 
@@ -68,14 +81,28 @@ class App extends React.Component {
 
   render() {
     if(!this.state.loading) {
-      return (
-        <div className="App">
-          <StarshipsList 
-            starships={this.state.starships}
-          />
-          {this.renderPaginationbuttons()}
-        </div>
-      );
+      if(this.state.starships.length) {
+        return (
+          <div className="App">
+            <Searchbar 
+              inputValue={this.state.searchInputValue}
+              inputValueChange={this.inputValueChange.bind(this)}
+              handleSearchClick={this.handleSearchClick.bind(this)}
+            />
+            <StarshipsList 
+              starships={this.state.starships}
+            />
+            {this.renderPaginationbuttons()}
+          </div>
+        );
+      } else {
+        return (
+          <div className='noResults'>
+            Sorry human, no results were found!
+          </div>
+        
+        );
+      }
     } else {
       return <ReactLoading type='cylon' color='#3caa36' height={'20%'} width={'20%'} />;
     }
