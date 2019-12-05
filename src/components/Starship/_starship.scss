@@ -9,7 +9,23 @@
   background-color: #ffffff;
   cursor: pointer;
 
+  @include small-tablet {
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    border-bottom: 1px solid $lightgray;
+  }
+
   &:hover {
     background-color: $lightgray;
+  }
+
+  .label {
+    display: none;
+    margin-right: 5px;
+    font-weight: bold;
+
+    @include small-tablet {
+      display: inline-block;
+    }
   }
 }
