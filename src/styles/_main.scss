@@ -1,0 +1,15 @@
+html,
+body {
+  font-size: 13px;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f1f1f1;
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+}
+
+* {
+  box-sizing: border-box;
+}

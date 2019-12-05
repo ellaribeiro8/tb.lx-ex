@@ -16,11 +16,20 @@
     color: $black;
     background-color: $lightgray;
     font-weight: bold;
+
+    @include small-tablet {
+      display: none;
+    }
   }
 
   .infoRow {
     width: 33%;
     padding: 12px;
+
+    @include small-tablet {
+      width: 100%;
+      padding: 6px;
+    }
   }
 }
 
