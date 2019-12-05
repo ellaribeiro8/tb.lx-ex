@@ -3,8 +3,8 @@ import './App.scss';
 import ReactLoading from 'react-loading';
 import Searchbar from '../Searchbar/Searchbar'
 import StarshipsList from '../StarshipsList/StarshipsList';
-// import StarshipInfoCard from '../StarshipInfoCard/StarshipInfoCard';
 import DarthVader from '../../assets/Darth_Vader.jpg';
+import StarshipInfoCard from '../StarshipInfoCard/StarshipInforCard';
 
 const ENDPOINT = 'https://swapi.co/api/starships/';
 
@@ -17,6 +17,8 @@ class App extends React.Component {
         next: '',
         previous: '',
         searchInputValue: '',
+        modalIsOpen: false,
+        selectedStarship: null,
     }
   }
 
@@ -35,6 +37,15 @@ class App extends React.Component {
         starships: data.results,
         next: data.next,
         previous: data.previous
+      }));
+  }
+
+  getSelectedStarshipData(currentURL) {
+    fetch(currentURL)
+      .then(data => data.json())
+      .then(data => this.setState({
+        modalIsOpen: true,
+        selectedStarship: data,
       }));
   }
 
@@ -80,6 +91,19 @@ class App extends React.Component {
     return pagination;
   }
 
+  handleStarshipClick(e) {
+    let starshipUrl = e.target.parentNode.getAttribute('url');
+
+    this.getSelectedStarshipData(starshipUrl);
+  }
+
+  closeCard() {
+    this.setState({
+      modalIsOpen: false,
+      selectedStarship: null,
+    });
+  }
+
   render() {
     if(!this.state.loading) {
       if(this.state.starships.length) {
@@ -92,10 +116,15 @@ class App extends React.Component {
             />
             <StarshipsList 
               starships={this.state.starships}
+              handleStarshipClick={this.handleStarshipClick.bind(this)}
             />
             <div className='Pagination'>
               {this.renderPaginationbuttons()}
             </div>
+            {this.state.modalIsOpen && this.state.selectedStarship ? 
+              <StarshipInfoCard isOpen={this.state.modalIsOpen} starship={this.state.selectedStarship} closeCard={this.closeCard.bind(this)} /> :
+              null
+            }
           </div>
         );
       } else {
