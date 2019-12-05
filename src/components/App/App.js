@@ -36,7 +36,8 @@ class App extends React.Component {
         loading: false,
         starships: data.results,
         next: data.next,
-        previous: data.previous
+        previous: data.previous,
+        searchInputValue: '',
       }));
   }
 
@@ -104,6 +105,10 @@ class App extends React.Component {
     });
   }
 
+  backToMainList() {
+    this.getStarshipsData(ENDPOINT);
+  }
+
   render() {
     if(!this.state.loading) {
       if(this.state.starships.length) {
@@ -132,6 +137,7 @@ class App extends React.Component {
           <div className='noResults'>
             <img src={DarthVader} alt='Darth Vader' />
             Sorry human, no results were found!
+            <button onClick={this.backToMainList.bind(this)} className='backButton'>← Back</button>
           </div>
         
         );

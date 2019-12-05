@@ -94,4 +94,8 @@
       width: 100%;
     }
   }
+
+  .backButton {
+    @extend .ghostButton;
+  }
 }

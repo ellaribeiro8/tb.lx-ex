@@ -36,3 +36,17 @@
         background-color: darken($color: $mediumgray, $amount: 5);
     }
 }
+
+.ghostButton {
+    @extend .button;
+    color: #ffffff;
+    background-color: transparent;
+    font-size: 1em;
+    margin-top: 40px;
+    border: none;
+    opacity: .6;
+
+    &:hover {
+        opacity: .8;
+    }
+}
