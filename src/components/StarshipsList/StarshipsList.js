@@ -11,9 +11,11 @@ class StarshipsList extends React.Component {
         starships.push(
           <Starship 
             key={i}
+            url={starship.url}
             name={starship.name}
             model={starship.model}
             starship_class={starship.starship_class}
+            handleStarshipClick={this.props.handleStarshipClick}
           />
         )
       })
